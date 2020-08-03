@@ -18,12 +18,12 @@ export default function Product({ id, name }) {
   let capitalizedName = name[0].toUpperCase() + name.slice(1);
 
   const appContext = useContext(AppContext);
-  const { formatPrice, getQuantity, cartAdd, cartSub } = appContext;
+  const { formatPrice, getQuantity, cartAdd, cartSub, pokeImgUrl } = appContext;
 
   return (
     <Container>
       <img
-        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
+        src={pokeImgUrl(id)}
         onError={(e)=>{e.target.onerror = null; e.target.src=errorimg}}
         alt=""
       />

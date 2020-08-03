@@ -13,11 +13,11 @@ import ListedProduct from "./../ListedProduct/ListedProduct";
 
 export default function SideBar() {
   const appContext = useContext(AppContext);
-  const { cart, getTotal, getTotalItems, formatCurrency } = appContext;
+  const { cart, getTotal, getTotalItems, formatCurrency, showSidebar, data } = appContext;
 
   return (
-    <Container>
-      <Title>Carrinho ({getTotalItems()})</Title>
+    <Container showSidebar={showSidebar}>
+      <Title>{data.cartText} ({getTotalItems()})</Title>
       <ProductsList>
         {cart.map((item) => (
           <ListedProduct key={item.id} {...item} />
@@ -26,7 +26,7 @@ export default function SideBar() {
       <FlexEnd>
         <Total>Total: {formatCurrency(getTotal())}</Total>
         <Link to="/resumo">
-          <CheckoutButton>Continuar</CheckoutButton>
+          <CheckoutButton>{data.nextText}</CheckoutButton>
         </Link>
       </FlexEnd>
     </Container>

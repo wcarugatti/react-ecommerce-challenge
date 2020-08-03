@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   z-index: 2;
-  height: 58px;
+  height: var(--header-size);
   width: 100%;
   position: fixed;
   display: flex;
@@ -15,7 +15,12 @@ export const Container = styled.div`
   }
 
   + div{
-    padding-top: 58px;
+    padding-top: var(--header-size);
+  }
+
+  @media (max-width: 500px){
+    display: grid;
+    grid-template-areas: "brand cart" "searchbar searchbar"
   }
 
 `;

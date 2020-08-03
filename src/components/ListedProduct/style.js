@@ -4,7 +4,7 @@ import { ReactComponent as DeleteIcon } from "../../assets/delete-icon.svg";
 export const Container = styled.div`
   width: calc(100% - 10px);
   margin: 5px;
-  border-radius: 3px;
+  border-radius: ${props => props.theme.listedBorderRadius};
   background-color: var(--white);
   padding: 1em 2em;
   display: flex;

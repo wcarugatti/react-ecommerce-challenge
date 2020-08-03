@@ -6,12 +6,22 @@ export const Container = styled.div`
   background-color: var(--secondary);
   color: var(--text);
   width: var(--sidebar-size);
-  height: calc(100vh - 58px);
+  max-width: 100vw;
+  height: calc(100vh - var(--header-size));
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
   box-shadow: var(--shadow1);
+  transition: 0.5s;
+
+  @media (max-width: 1200px){
+    right: ${props => props.showSidebar ? "0px" : "-100vw"};
+  }
+
+  @media (max-width: 400px){
+    width: 100vw;
+  }
+
 `;
 
 export const Title = styled.div`

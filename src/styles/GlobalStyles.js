@@ -15,7 +15,7 @@ export default createGlobalStyle`
     border: 0;
     outline: 0;
 
-    font-family: 'Roboto', sans-serif;
+    font-family: ${props=> props.theme.font};
   }
 
   a{
@@ -24,23 +24,27 @@ export default createGlobalStyle`
   }
 
   :root {
-    /* --primary: #35c600; */
-    /* --secondary: #d6ffc8; */
-    /* --primary: 	#8ab446; */
-    /* --secondary: #acc864; */
-    --primary: 	#92a65f;
-    --secondary: #dcde9f;
-    --red: red;
-    --white: #f3f4d3;
-    --text: #555555;
-    --lighttext: #a5aebc;
-    --lightgray: #dfdfdf;
-    --lightwhite: #fff;
+    /* --primary: 	#92a65f;
+    --secondary: #dcde9f; */
+    --primary: 	${props=> props.theme.primary};
+    --secondary: ${props=> props.theme.secondary};
+    --red: ${props=> props.theme.red};
+    --white: ${props=> props.theme.white};
+    --text: ${props=> props.theme.text};
+    --lighttext: ${props=> props.theme.lighttext};
+    --lightgray: ${props=> props.theme.lightgray};
+    --lightwhite: ${props=> props.theme.lightwhite};
 
     --shadow1: 0 0.9px 1.5px rgba(0, 0, 0, 0.03),
     0 3.1px 5.5px rgba(0, 0, 0, 0.08), 0 14px 25px rgba(0, 0, 0, 0.12);
 
-    --sidebar-size: 370px;
+    --sidebar-size: 340px;
+    --header-size: 58px;
+
+    @media (max-width: 500px){
+      --header-size: 116px;
+    }
+
   }
 
   body{

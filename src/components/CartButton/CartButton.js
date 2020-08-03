@@ -1,21 +1,27 @@
 import React, { useContext } from "react";
-import { useHistory } from 'react-router';
+import { useHistory } from "react-router";
 import AppContext from "../../context/AppContext";
-import { Container, CartIcon, Counter } from "./style";
+import { Container, IconContainer, CartIcon, Counter } from "./style";
 
 export default function CartButton() {
   const appContext = useContext(AppContext);
-  const { getTotalItems } = appContext;
+  const { getTotalItems, showSidebar, setShowSidebar } = appContext;
   const history = useHistory();
 
-  const handleCartClick = () =>{
-    history.push("/resumo");
-  }
+  const handleCartClick = () => {
+    if (window.innerWidth > 1200) {
+      history.push("/resumo");
+    } else {
+      setShowSidebar(!showSidebar);
+    }
+  };
 
   return (
-    <Container onClick={handleCartClick}>
-      <CartIcon />
-      {getTotalItems() > 0 && <Counter>{getTotalItems()}</Counter>}
+    <Container>
+      <IconContainer onClick={handleCartClick}>
+        <CartIcon />
+        {getTotalItems() > 0 && <Counter>{getTotalItems()}</Counter>}
+      </IconContainer>
     </Container>
   );
 }

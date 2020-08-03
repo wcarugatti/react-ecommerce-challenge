@@ -6,10 +6,10 @@ import { Link } from "react-router-dom";
 
 export default function Brand() {
   const appContext = useContext(AppContext);
-  const { clearSearch } = appContext;
+  const { clearSearch, data } = appContext;
   return (
     <Container>
-        <Link to="/" onClick={clearSearch}>GrassStore</Link>
+        <Link to="/" onClick={clearSearch}>{data.storeName}</Link>
     </Container>
   );
 }

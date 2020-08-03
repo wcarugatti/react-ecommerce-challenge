@@ -8,6 +8,9 @@ export const Container = styled.tr`
   > td {
     text-align: center;
     padding: 20px;
+    @media (max-width: 500px) {
+      padding: 8px;
+    }
   }
 `;
 

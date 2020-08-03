@@ -6,14 +6,14 @@ import ProductsGrid from "../ProductsGrid/ProductsGrid";
 
 export default function Catalog() {
   const appContext = useContext(AppContext);
-  const { currentTerm, loading } = appContext;
+  const { currentTerm, loading, showSidebar } = appContext;
   console.log(currentTerm);
 
   if (loading) {
     return <Container></Container>;
   }
   return (
-      <Container>
+      <Container showSidebar={showSidebar}>
         {currentTerm !== "" && <h3>Você pesquisou por: {currentTerm}</h3>}
         <ProductsGrid />
         <Pagination />

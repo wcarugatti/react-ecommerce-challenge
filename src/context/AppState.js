@@ -4,7 +4,9 @@ import AppContext from "./AppContext";
 import usePersistedState from "./usePersistedState.js";
 
 const AppState = (props) => {
-  const [cart, setCart] = usePersistedState("grassStore", []);
+  const data = props.data;
+  const [cart, setCart] = usePersistedState(data.localStorageKey, []);
+  const [showSidebar, setShowSidebar] = useState(false);
   const [pokes, setPokes] = useState([]);
   const [pagePokes, setPagePokes] = useState([]);
   const [currentPokes, setCurrentPokes] = useState([]);
@@ -13,6 +15,7 @@ const AppState = (props) => {
   const [totalPages, setTotalPages] = useState(1);
   const [currentTerm, setCurrentTerm] = useState("");
   const pokesPerPage = 12;
+  
 
   const apiUrl = "https://pokeapi.co/api/v2";
 
@@ -116,12 +119,12 @@ const AppState = (props) => {
     return count;
   };
 
-  const pokeUrl = (name) => {
-    return `${apiUrl}/pokemon/${name}`;
+  const pokeImgUrl = (id) => {
+    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
   };
 
   const pokeListUrl = () => {
-    return `${apiUrl}/type/grass`;
+    return `${apiUrl}/type/${data.type}`;
   };
 
   const processPokes = (pokemon) => {
@@ -154,6 +157,8 @@ const AppState = (props) => {
     setPage(1);
       
   }
+
+  
 
   useEffect(() => {
     const fetchPokes = async () => {
@@ -190,7 +195,7 @@ const AppState = (props) => {
         setPage,
         pokesPerPage,
         pokeListUrl,
-        pokeUrl,
+        pokeImgUrl,
         getPrice,
         formatPrice,
         cartAdd,
@@ -206,6 +211,9 @@ const AppState = (props) => {
         pagePokes,
         clearSearch,
         currentTerm,
+        showSidebar, 
+        setShowSidebar,
+        data,
       }}
     >
       {props.children}

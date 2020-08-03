@@ -5,7 +5,7 @@ import { Container, SearchButton } from "./style";
 export default function SearchBar() {
   const [searchTerm, setSearchTerm] = useState("");
   const appContext = useContext(AppContext);
-  const { handleSearch } = appContext;
+  const { handleSearch, data } = appContext;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,7 +22,7 @@ export default function SearchBar() {
         <input
           onChange={handleInput}
           type="text"
-          placeholder="busque aqui seu produto"
+          placeholder={data.searchPlaceholder}
         />
       </form>
       <SearchButton onClick={handleSubmit} />

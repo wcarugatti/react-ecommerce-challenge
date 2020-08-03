@@ -13,10 +13,10 @@ export default function Summary() {
   }
 
   const appContext = useContext(AppContext);
-  const { getTotal, getTotalItems, formatCurrency } = appContext;
+  const { getTotal, getTotalItems, formatCurrency, data } = appContext;
   return (
     <Container>
-      <h2>resumo do pedido</h2>
+      <h2>{data.summaryText}</h2>
       <hr />
       <span>
         <span>
@@ -38,7 +38,7 @@ export default function Summary() {
         <CheckoutModal isOpen={modalIsOpen} closeModal={closeModal}>
           <ModalContent>
             <h2>Obrigado!</h2>
-            <h2>Você ganhou de volta {formatCurrency(getTotal()*0.15) }</h2>
+            <h2>Você ganhou de volta {formatCurrency(getTotal()*data.cashback) }</h2>
           </ModalContent>
         </CheckoutModal>
       </CheckoutButton>

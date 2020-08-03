@@ -36,6 +36,7 @@ export const CheckoutButton = styled.div`
   margin-bottom: 20px;
   > button {
     background-color: var(--lightgray);
+    color: var(--text);
     border-radius: 5px;
     margin: auto;
     padding: 15px;

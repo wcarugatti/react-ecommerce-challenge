@@ -1,19 +1,12 @@
 import styled, { css } from "styled-components";
 
 export const Container = styled.div`
-  /* flex: 1 0 21%; */
-
   background-color: var(--white);
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 5px;
-  /* border-right: 1px solid #dfdfdf; */
-  /* border-bottom: 1px solid #dfdfdf; */
-  margin-left: 7px;
-  margin-top: 7px;
-  /* border: 1px solid var(--lightgray); */
-  border-radius: 5px;
+  border-radius: ${props => props.theme.productBorderRadius};
 
   > img {
     width: 140px;
@@ -52,7 +45,7 @@ export const Quantity = styled.span`
 export const Caption = styled.div`
   width: 100%;
   padding: 5px;
-  border-radius: 3px;
+  border-radius: ${props => props.theme.captionBorderRadius};
   /* background-color: #f3f2f2; */
   background-color: var(--lightgray);
   display: flex;
@@ -71,7 +64,7 @@ const baseButton = css`
   cursor: pointer;
   transition: 0.2s;
   margin-right: 3px;
-  border-radius: 2px;
+  border-radius: ${props => props.theme.buttonBorderRadius};
   width: 29px;
   height: 29px;
   font-weight: 500;
@@ -91,8 +84,8 @@ export const SubButton = styled.button`
   ${baseButton}
   :hover, :active {
     background-color: transparent;
-    color: red;
+    color: var(--red);
   }
-  background-color: red;
-  border: 1px solid red;
+  background-color: var(--red);
+  border: 1px solid var(--red);
 `;
