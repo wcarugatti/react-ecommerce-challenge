@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import AppContext from "./AppContext";
-import usePersistedState from './usePersistedState.js'
+import usePersistedState from "./usePersistedState.js";
 
 const AppState = (props) => {
-  const [cart, setCart] = usePersistedState("grassStore",[]);
+  const [cart, setCart] = usePersistedState("grassStore", []);
   const [pokes, setPokes] = useState([]);
+  const [pagePokes, setPagePokes] = useState([]);
+  const [currentPokes, setCurrentPokes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
-  const [pokesPerPage, setPokesPerPage] = useState(18);
+  const [totalPages, setTotalPages] = useState(1);
+  const [currentTerm, setCurrentTerm] = useState("");
+  const pokesPerPage = 12;
 
   const apiUrl = "https://pokeapi.co/api/v2";
 
@@ -23,12 +27,12 @@ const AppState = (props) => {
     });
   };
 
-  const formatCurrency = (price) =>{
-      return price.toLocaleString("pt-br", {
-        style: "currency",
-        currency: "BRL",
-      });
-  }
+  const formatCurrency = (price) => {
+    return price.toLocaleString("pt-br", {
+      style: "currency",
+      currency: "BRL",
+    });
+  };
 
   const getQuantity = (id) => {
     for (let i = 0; i < cart.length; i++) {
@@ -39,7 +43,17 @@ const AppState = (props) => {
     return 0;
   };
 
-  const getName = (id) => {
+  const getPokes = useCallback(() => {
+    let tempPokes = [];
+    let pokesThisPage =
+      page === totalPages ? currentPokes.length % pokesPerPage : pokesPerPage;
+    for (let i = 0; i < pokesThisPage; i++) {
+      tempPokes.push(currentPokes[(page - 1) * pokesPerPage + i]);
+    }
+    setPagePokes(tempPokes);
+  },[page,totalPages, currentPokes])
+
+  const getPokeName = (id) => {
     for (let i = 0; i < pokes.length; i++) {
       if (pokes[i].id === id) {
         return pokes[i].name;
@@ -63,7 +77,7 @@ const AppState = (props) => {
     if (!hasProduct) {
       setCart([
         ...cart,
-        { id, name: getName(id), price: getPrice(id), quantity: 1 },
+        { id, name: getPokeName(id), price: getPrice(id), quantity: 1 },
       ]);
     }
   };
@@ -86,7 +100,7 @@ const AppState = (props) => {
     setCart(cart.filter((item) => item.id !== id));
   };
 
-  const getTotal = (format) => {
+  const getTotal = () => {
     let total = 0;
     for (let i = 0; i < cart.length; i++) {
       total += cart[i].price * cart[i].quantity;
@@ -94,13 +108,13 @@ const AppState = (props) => {
     return total;
   };
 
-  const getTotalItems = () =>{
+  const getTotalItems = () => {
     let count = 0;
     for (let i = 0; i < cart.length; i++) {
       count += cart[i].quantity;
     }
     return count;
-  }
+  };
 
   const pokeUrl = (name) => {
     return `${apiUrl}/pokemon/${name}`;
@@ -122,19 +136,46 @@ const AppState = (props) => {
     return pokes;
   };
 
+  const handleSearch = (searchTerm) => {
+    let nextPokes = pokes.filter((item) => {
+      return item.name.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0;
+    });
+    setCurrentTerm(searchTerm);
+    setCurrentPokes(nextPokes);
+    setTotalPages(Math.ceil(nextPokes.length / pokesPerPage));
+    setPage(1);
+  };
+
+  const clearSearch = () =>{
+
+    setCurrentTerm("");
+    setCurrentPokes(pokes);
+    setTotalPages(Math.ceil(pokes.length / pokesPerPage));
+    setPage(1);
+      
+  }
+
   useEffect(() => {
     const fetchPokes = async () => {
       setLoading(true);
       const {
         data: { pokemon },
       } = await axios.get(pokeListUrl());
-
-      setPokes(processPokes(pokemon));
+      let tempPokes = processPokes(pokemon);
+      setPokes(tempPokes);
+      setCurrentPokes(tempPokes);
+      setTotalPages(Math.ceil(tempPokes.length / pokesPerPage));
       setLoading(false);
     };
-
     fetchPokes();
   }, []);
+
+
+  useEffect(() => {
+
+    getPokes();
+
+  }, [getPokes])
 
   return (
     <AppContext.Provider
@@ -148,7 +189,6 @@ const AppState = (props) => {
         page,
         setPage,
         pokesPerPage,
-        setPokesPerPage,
         pokeListUrl,
         pokeUrl,
         getPrice,
@@ -160,6 +200,12 @@ const AppState = (props) => {
         getTotal,
         getTotalItems,
         formatCurrency,
+        getPokes,
+        totalPages,
+        handleSearch,
+        pagePokes,
+        clearSearch,
+        currentTerm,
       }}
     >
       {props.children}

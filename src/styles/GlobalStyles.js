@@ -24,17 +24,27 @@ export default createGlobalStyle`
   }
 
   :root {
-    --green: #35c600;
-    --lightgreen: #d6ffc8;
+    /* --primary: #35c600; */
+    /* --secondary: #d6ffc8; */
+    /* --primary: 	#8ab446; */
+    /* --secondary: #acc864; */
+    --primary: 	#92a65f;
+    --secondary: #dcde9f;
     --red: red;
-    --white: #fff;
+    --white: #f3f4d3;
     --text: #555555;
     --lighttext: #a5aebc;
     --lightgray: #dfdfdf;
+    --lightwhite: #fff;
 
     --shadow1: 0 0.9px 1.5px rgba(0, 0, 0, 0.03),
     0 3.1px 5.5px rgba(0, 0, 0, 0.08), 0 14px 25px rgba(0, 0, 0, 0.12);
 
     --sidebar-size: 370px;
   }
+
+  body{
+    background-color: var(--secondary);
+  }
+
 `;

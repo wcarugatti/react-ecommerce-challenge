@@ -2,6 +2,8 @@ import styled, { css } from "styled-components";
 
 export const Container = styled.div`
   /* flex: 1 0 21%; */
+
+  background-color: var(--white);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,7 +12,7 @@ export const Container = styled.div`
   /* border-bottom: 1px solid #dfdfdf; */
   margin-left: 7px;
   margin-top: 7px;
-  border: 1px solid var(--lightgray);
+  /* border: 1px solid var(--lightgray); */
   border-radius: 5px;
 
   > img {
@@ -80,10 +82,10 @@ export const AddButton = styled.button`
   ${baseButton}
   :hover, :active {
     background-color: transparent;
-    color: var(--green);
+    color: var(--primary);
   }
-  background-color: var(--green);
-  border: 1px solid var(--green);
+  background-color: var(--primary);
+  border: 1px solid var(--primary);
 `;
 export const SubButton = styled.button`
   ${baseButton}

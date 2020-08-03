@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   position: fixed;
   right: 0px;
-  background-color: var(--lightgreen);
+  background-color: var(--secondary);
   color: var(--text);
   width: var(--sidebar-size);
   height: calc(100vh - 58px);

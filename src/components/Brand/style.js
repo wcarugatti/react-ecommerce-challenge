@@ -1,8 +1,11 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
-cursor: pointer;
-color: #fff;
-font-style: 'Roboto' !important;
-  
+  cursor: pointer;
+  transition: 0.2s;
+  color: var(--white);
+  font-style: "Roboto" !important;
+  :hover{
+    color: var(--lightwhite);
+  }
 `;

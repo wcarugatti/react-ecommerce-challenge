@@ -2,14 +2,24 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   height: calc(100% - 60px);
+  h3,h2,h1, th {
+    color: var(--text);
+  }
+
+  h3 > a{
+    text-decoration: underline;
+  }
+  
 `;
 
 export const GrayBox = styled.div`
   /* height: 100%; */
-  background-color: var(--lightgray);
+  min-height: 300px;
+  background-color: var(--white);
   margin: 30px 60px;
   padding: 15px;
   border-radius: 10px;
+
 `;
 
 export const Title = styled.span`
@@ -20,9 +30,13 @@ export const Title = styled.span`
 export const CartTable = styled.table`
   margin: 5px;
   th {
-    background-color: var(--white);
+    /* background-color: var(--white); */
     padding: 10px 20px;
   }
+  th,td{
+    border: 1px solid var(--lighttext);
+  }
+
 `;
 
 export const Wrapper = styled.div`

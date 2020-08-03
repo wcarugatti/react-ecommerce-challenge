@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import AppContext from "../../context/AppContext";
+import errorimg from "../../assets/No_image_available.png"
 import {
   Container,
   SelectButtons,
@@ -23,6 +24,7 @@ export default function Product({ id, name }) {
     <Container>
       <img
         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
+        onError={(e)=>{e.target.onerror = null; e.target.src=errorimg}}
         alt=""
       />
       <Caption>

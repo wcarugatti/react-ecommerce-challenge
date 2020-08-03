@@ -26,7 +26,7 @@ export default function SideBar() {
       <FlexEnd>
         <Total>Total: {formatCurrency(getTotal())}</Total>
         <Link to="/resumo">
-          <CheckoutButton>Finalizar Compra</CheckoutButton>
+          <CheckoutButton>Continuar</CheckoutButton>
         </Link>
       </FlexEnd>
     </Container>
