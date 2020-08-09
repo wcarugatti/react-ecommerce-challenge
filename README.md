@@ -6,6 +6,7 @@ The project is the result of a react challenge. The challenge proposal was to de
 ReactJS, ContextAPI and Styled Components.
 
 Demo1: http://pokegrassstore.netlify.app/
+
 Demo2: https://pokedragonstore.netlify.app/
 
 ![](pokestore.gif)
